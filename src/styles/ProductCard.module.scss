@@ -1,0 +1,23 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: start;
+    border-radius: 4px;
+    padding: 2rem;
+    margin: 0.75rem;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+
+.cardImage {
+    object-fit: contain;
+}
+.cardContent{
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    padding-left: 0;
+}
+}
