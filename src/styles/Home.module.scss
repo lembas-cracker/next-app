@@ -1,0 +1,6 @@
+.homepage {
+    display: grid;
+    grid-template-columns: repeat(3, 350px);
+    justify-content: center;
+    gap: 2rem;
+}
