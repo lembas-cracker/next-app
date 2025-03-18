@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [cart, setCart] = useState<Product[]>([]);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -25,14 +24,10 @@ export default function Home() {
     fetchProduct();
   }, []);
 
-  const handleAddToCart = (product: Product) => {
-    setCart([...cart, product]);
-  };
-
   return (
     <main className={styles.homepage}>
       {products.map((product) => (
-        <ProductCard key={product.id} product={product} onAddToCart={handleAddToCart} />
+        <ProductCard key={product.id} product={product} />
       ))}
     </main>
   );
