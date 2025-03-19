@@ -1,0 +1,18 @@
+.singleProduct {
+    @media (max-width: 1024px) {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        
+    }
+.imageContainer {
+    @media (max-width: 1024px) {
+        width: 100%;
+    }
+}
+.detailsContainer {
+    @media (max-width: 1024px) {
+        padding: 1rem 0;
+    }
+}
+}
