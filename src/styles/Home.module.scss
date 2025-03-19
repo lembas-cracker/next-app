@@ -1,7 +1,16 @@
+.homepageContainer {
+  display: flex;
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
 .homepage {
     display: grid;
     grid-template-columns: repeat(3, 350px);
     justify-content: center;
     gap: 2rem;
     margin: 2rem 0;
-}
+
+    @media (max-width: 1024px) {
+        grid-template-columns: repeat(1, 350px);
+      }
+}}
