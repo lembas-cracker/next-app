@@ -4,6 +4,7 @@ import "./globals.scss";
 import Header from "@/components/Header";
 import { CartProvider } from "@/contexts/CartContext";
 import { StyledEngineProvider } from "@mui/material/styles";
+import { SidebarProvider } from "@/contexts/SidebarContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,15 +28,16 @@ export default function RootLayout({
 }>) {
   return (
     <StyledEngineProvider injectFirst>
-      <CartProvider>
-        <html lang="en">
-          <body className={`${geistSans.variable} ${geistMono.variable}`}>
-            <Header />
-
-            {children}
-          </body>
-        </html>
-      </CartProvider>
+      <SidebarProvider>
+        <CartProvider>
+          <html lang="en">
+            <body className={`${geistSans.variable} ${geistMono.variable}`}>
+              <Header />
+              {children}
+            </body>
+          </html>
+        </CartProvider>
+      </SidebarProvider>
     </StyledEngineProvider>
   );
 }
