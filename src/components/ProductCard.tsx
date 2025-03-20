@@ -2,6 +2,7 @@ import { Button, ButtonGroup, Card, CardContent, CardMedia, Stack, Typography } 
 import styles from "../styles/ProductCard.module.scss";
 import React, { useContext, useState } from "react";
 import { CartContext } from "@/contexts/CartContext";
+import { useRouter } from "next/navigation";
 
 export type Product = {
   id: number;
@@ -9,6 +10,7 @@ export type Product = {
   price: number;
   description: string;
   image: string;
+  isNew?: boolean;
 };
 
 type ProductCardProps = {
@@ -19,6 +21,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [isInCart, setIsInCart] = useState(false);
   const [quantity, setQuantity] = useState<number>(1);
   const { addToCart, removeFromCart } = useContext(CartContext);
+  const router = useRouter();
 
   const handleAddToCart = () => {
     setIsInCart(true);
@@ -44,11 +47,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     }
   };
 
+  const handleNavigate = () => {
+    router.push(`/products/${product.id.toString()}`);
+  };
+
   return (
     <Card className={styles.card}>
-      <CardMedia className={styles.cardImage} image={product.image} component="img" height="200" width="200" alt="" />
+      <CardMedia
+        className={styles.cardImage}
+        image={product.image}
+        component="img"
+        height="200"
+        width="200"
+        alt=""
+        onClick={handleNavigate}
+      />
 
-      <CardContent className={styles.cardContent}>
+      <CardContent className={styles.cardContent} onClick={handleNavigate}>
         <Typography>{product.title}</Typography>
         <Typography variant="body2" sx={{ fontSize: 15 }}>
           {product.price.toFixed(2)}$
@@ -81,4 +96,4 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   );
 };
 
-export default ProductCard;
+export default React.memo(ProductCard);
