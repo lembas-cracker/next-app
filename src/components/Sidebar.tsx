@@ -1,6 +1,8 @@
 import { SidebarContext } from "@/contexts/SidebarContext";
-import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar } from "@mui/material";
+import { Box, Drawer, List, ListItem, Toolbar } from "@mui/material";
 import React, { useContext } from "react";
+import PriceFilter from "./PriceFilter";
+import NewProductsFilter from "./NewProductsFilter";
 
 const Sidebar = () => {
   const { handleDrawerClose, handleDrawerTransitionEnd, mobileOpen } = useContext(SidebarContext);
@@ -9,17 +11,16 @@ const Sidebar = () => {
     <div>
       <Toolbar />
       <List>
-        {["Filter1", "Filter2"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>{index % 2 === 0 ? "🍕" : "🍔"}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        <ListItem disablePadding>
+          <PriceFilter />
+        </ListItem>
+        <ListItem disablePadding>
+          <NewProductsFilter />
+        </ListItem>
       </List>
     </div>
   );
+
   return (
     <Box sx={{ display: "flex" }}>
       <Box component="nav" sx={{ width: { sm: 300 }, flexShrink: { sm: 0 } }} aria-label="sidebar filters">
@@ -44,7 +45,7 @@ const Sidebar = () => {
           variant="permanent"
           sx={{
             display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": { boxSizing: "border-box", width: 300, marginTop: "2rem", zIndex: -1 },
+            "& .MuiDrawer-paper": { boxSizing: "border-box", width: 300, marginTop: "3rem" },
           }}
           open
         >
