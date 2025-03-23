@@ -1,8 +1,9 @@
-import { Button, ButtonGroup, Card, CardContent, CardMedia, Stack, Typography } from "@mui/material";
+import { Button, ButtonGroup, Card, CardContent, Stack, Typography } from "@mui/material";
 import styles from "../styles/ProductCard.module.scss";
 import React, { useContext, useState } from "react";
 import { CartContext } from "@/contexts/CartContext";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export type Product = {
   id: number;
@@ -53,10 +54,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
     <Card className={styles.card}>
-      <CardMedia
+      <Image
         className={styles.cardImage}
-        image={product.image}
-        component="img"
+        src={product.image}
         height="200"
         width="200"
         alt=""
@@ -70,7 +70,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </Typography>
       </CardContent>
 
-      <Stack direction="row" sx={{ width: "100%" }}>
+      <Stack direction="row" sx={{ minWidth: "100%" }}>
         {isInCart ? (
           <ButtonGroup sx={{ width: "100%" }} variant="outlined" aria-label="Basic button group">
             <Button sx={{ flex: 1 }} onClick={handleDecreaseQuantity}>

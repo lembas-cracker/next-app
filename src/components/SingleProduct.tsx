@@ -22,8 +22,15 @@ const SingleProduct: React.FC<ProductDetailsProps> = ({ product }) => {
         }}
         className={styles.singleProduct}
       >
-        <Box sx={{ width: "350px", height: "auto" }} className={styles.imageContainer}>
-          <Image src={product.image} alt={product.title} layout="responsive" width={350} height={350} />
+        <Box className={styles.imageContainer}>
+          <Image
+            src={product.image}
+            alt={product.title}
+            priority
+            style={{ objectFit: "contain" }}
+            width={350}
+            height={450}
+          />
         </Box>
         <Box sx={{ px: 3, display: "flex", flexDirection: "column" }} className={styles.detailsContainer}>
           <Typography variant="h4" component="h1" gutterBottom>
