@@ -5,6 +5,8 @@ import Header from "@/components/Header";
 import { CartProvider } from "@/contexts/CartContext";
 import { StyledEngineProvider } from "@mui/material/styles";
 import { SidebarProvider } from "@/contexts/SidebarContext";
+import { FilterProvider } from "@/contexts/FiltersContext";
+import { SortingProvider } from "@/contexts/SortingContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,16 +30,20 @@ export default function RootLayout({
 }>) {
   return (
     <StyledEngineProvider injectFirst>
-      <SidebarProvider>
-        <CartProvider>
-          <html lang="en">
-            <body className={`${geistSans.variable} ${geistMono.variable}`}>
-              <Header />
-              {children}
-            </body>
-          </html>
-        </CartProvider>
-      </SidebarProvider>
+      <SortingProvider>
+        <FilterProvider>
+          <SidebarProvider>
+            <CartProvider>
+              <html lang="en">
+                <body className={`${geistSans.variable} ${geistMono.variable}`}>
+                  <Header />
+                  {children}
+                </body>
+              </html>
+            </CartProvider>
+          </SidebarProvider>
+        </FilterProvider>
+      </SortingProvider>
     </StyledEngineProvider>
   );
 }
