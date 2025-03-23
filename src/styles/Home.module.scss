@@ -3,14 +3,33 @@
   @media (max-width: 1024px) {
     flex-direction: column;
   }
+
+  .homepageWrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    margin: 1rem;
+   
+    
+
+    .sortingContainer {
+      max-height: fit-content;
+      margin-bottom: 1rem;
+    }
+  }
+
 .homepage {
     display: grid;
-    grid-template-columns: repeat(3, 350px);
+    grid-template-columns: repeat(4, 300px);
     justify-content: center;
     gap: 2rem;
-    margin: 2rem 0;
+    margin: 1rem 0;
+    flex: 1;
+    
 
     @media (max-width: 1024px) {
-        grid-template-columns: repeat(1, 350px);
+        display: flex;
+        flex-direction: column;
       }
 }}
