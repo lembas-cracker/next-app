@@ -1,7 +1,8 @@
 "use client";
 import { Product } from "@/components/ProductCard";
-import { useFetchProducts } from "@/hooks/useFetchProducts";
-import { createContext, useContext, useEffect, useState } from "react";
+import products from "@/products.json";
+import { createContext, useContext, useState } from "react";
+import { useSorting } from "./SortingContext";
 
 type FilterState = {
   priceRange: { from?: number; to?: number };
@@ -33,8 +34,8 @@ const FilterContext = createContext<FilterContextType>(defaultFilterContextValue
 
 export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
   const [filters, setFilters] = useState<FilterState>(defaultFilterContextValue.filters);
-  const { products } = useFetchProducts();
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const { sortBy, sortOrder } = useSorting();
 
   const setPriceRange = (priceRange: { from?: number; to?: number }) => {
     setFilters((prev) => ({ ...prev, priceRange }));
@@ -45,7 +46,7 @@ export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const applyFilters = () => {
-    const filtered = products.filter((product) => {
+    const filtered: Product[] = products.filter((product) => {
       const from = filters.priceRange.from ?? 0; // 0, если undefined
       const to = filters.priceRange.to ?? 30000;
       const withinPriceRange = product.price >= from && product.price <= to;
@@ -53,7 +54,17 @@ export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
       return withinPriceRange && isNewProduct;
     });
 
-    setFilteredProducts(filtered);
+    const finalProducts = [...filtered].sort((a, b) => {
+      if (sortBy === "name") {
+        return sortOrder === "asc" ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
+      } else if (sortBy === "price") {
+        return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
+      } else {
+        return 0;
+      }
+    });
+
+    setFilteredProducts(finalProducts);
   };
 
   return (

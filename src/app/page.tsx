@@ -1,34 +1,36 @@
 "use client";
 
-import ProductCard, { Product } from "@/components/ProductCard";
+import ProductCard from "@/components/ProductCard";
 import styles from "../styles/Home.module.scss";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import Sidebar from "@/components/Sidebar";
+import { useFilters } from "@/contexts/FiltersContext";
+import Sorting from "@/components/Sorting";
+import { useSorting } from "@/contexts/SortingContext";
 
 export default function Home() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const { filters, applyFilters, filteredProducts } = useFilters();
+  const { sortBy, sortOrder } = useSorting();
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const response = await fetch("/data/products.json");
-        if (!response.ok) {
-          throw new Error("Failed to fetch products");
-        }
-        const data: Product[] = await response.json();
-        setProducts(data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
-
-    fetchProduct();
-  }, []);
+    applyFilters();
+  }, [filters, sortBy, sortOrder]);
 
   return (
-    <main className={styles.homepage}>
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
-    </main>
+    <div className={styles.homepageContainer}>
+      <div className={styles.sidebarContainer}>
+        <Sidebar />
+      </div>
+      <div className={styles.homepageWrapper}>
+        <div className={styles.sortingContainer}>
+          <Sorting />
+        </div>
+        <main className={styles.homepage}>
+          {filteredProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </main>
+      </div>
+    </div>
   );
 }
