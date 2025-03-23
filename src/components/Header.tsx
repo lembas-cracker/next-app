@@ -6,7 +6,6 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { CartContext } from "../contexts/CartContext";
 import { useRouter } from "next/navigation";
 import { SidebarContext } from "@/contexts/SidebarContext";
-import zIndex from "@mui/material/styles/zIndex";
 
 const Header = () => {
   const { totalPrice } = useContext(CartContext);

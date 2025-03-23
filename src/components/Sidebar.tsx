@@ -1,9 +1,8 @@
 import { SidebarContext } from "@/contexts/SidebarContext";
-import { Box, Drawer, List, ListItem, Toolbar } from "@mui/material";
+import { Box, Drawer, List, ListItem } from "@mui/material";
 import React, { useContext } from "react";
 import PriceFilter from "./PriceFilter";
 import NewProductsFilter from "./NewProductsFilter";
-import styles from "../styles/Sidebar.module.scss";
 
 const Sidebar = () => {
   const { handleDrawerClose, handleDrawerTransitionEnd, mobileOpen } = useContext(SidebarContext);

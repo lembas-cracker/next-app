@@ -6,7 +6,7 @@ import products from "@/products.json";
 import { Alert } from "@mui/material";
 import { useEffect, useState, use } from "react";
 
-const page = ({ params }: { params: Promise<{ id: string }> }) => {
+const Page = ({ params }: { params: Promise<{ id: string }> }) => {
   const [product, setProduct] = useState<Product | undefined>(undefined);
   const resolvedParams = use(params);
 
@@ -25,4 +25,4 @@ const page = ({ params }: { params: Promise<{ id: string }> }) => {
   return <SingleProduct product={product} />;
 };
 
-export default page;
+export default Page;
