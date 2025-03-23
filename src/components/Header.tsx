@@ -6,11 +6,13 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { CartContext } from "../contexts/CartContext";
 import { useRouter } from "next/navigation";
 import { SidebarContext } from "@/contexts/SidebarContext";
+import zIndex from "@mui/material/styles/zIndex";
 
 const Header = () => {
   const { totalPrice } = useContext(CartContext);
   const { handleDrawerToggle } = useContext(SidebarContext);
   const router = useRouter();
+  const isZero = Math.abs(totalPrice) < 0.0001; // проверяем, что точно 0
 
   const handleNavigate = () => {
     router.push("/");
@@ -36,7 +38,7 @@ const Header = () => {
           </Typography>
 
           <IconButton size="large" color="inherit" aria-label="cart">
-            <Badge badgeContent={totalPrice > 0 ? totalPrice.toFixed(2) + "$" : 0 + "$"} color="error">
+            <Badge badgeContent={isZero ? "0$" : `${totalPrice.toFixed(2)}$`} color="error">
               <ShoppingCartIcon />
             </Badge>
           </IconButton>
