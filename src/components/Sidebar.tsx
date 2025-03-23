@@ -3,13 +3,13 @@ import { Box, Drawer, List, ListItem, Toolbar } from "@mui/material";
 import React, { useContext } from "react";
 import PriceFilter from "./PriceFilter";
 import NewProductsFilter from "./NewProductsFilter";
+import styles from "../styles/Sidebar.module.scss";
 
 const Sidebar = () => {
   const { handleDrawerClose, handleDrawerTransitionEnd, mobileOpen } = useContext(SidebarContext);
 
   const drawer = (
     <div>
-      <Toolbar />
       <List>
         <ListItem disablePadding>
           <PriceFilter />
@@ -30,8 +30,8 @@ const Sidebar = () => {
           onTransitionEnd={handleDrawerTransitionEnd}
           onClose={handleDrawerClose}
           sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": { boxSizing: "border-box", width: 300 },
+            display: { xs: "block", sm: "block", md: "block" },
+            "& .MuiDrawer-paper": { boxSizing: "border-box", width: 300, py: "2rem" },
           }}
           slotProps={{
             root: {
@@ -44,8 +44,14 @@ const Sidebar = () => {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": { boxSizing: "border-box", width: 300, marginTop: "3rem" },
+            display: { xs: "none", sm: "none", md: "none", lg: "block" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: 300,
+              my: "4.75rem",
+              borderRight: "none",
+              py: "2rem",
+            },
           }}
           open
         >
